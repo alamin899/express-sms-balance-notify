@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npx", "nodemon", "server.js"]
+CMD [ "node", "server.js"]
