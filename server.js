@@ -2,7 +2,10 @@ const express = require('express')
 const app = express()
 require('dotenv').config();
 
-const { sendNotification } = require('./Notifications/slackNotificationService');
+const cron = require('node-cron');
+
+
+// const { sendNotification } = require('./Services/slackNotificationService');
 
 const port = process.env.PORT || 3000;
 
@@ -27,9 +30,13 @@ const port = process.env.PORT || 3000;
 // });
 /**===================================================================== */
 
+// Define your scheduled task to run every minute
+cron.schedule('*/1 * * * *', () => {
+  console.log('Running scheduled task every minute');
+});
 
 app.get('/', (req, res) => {
-   res.send(`Landing page`);
+   res.send(`Landing pages`);
 })
 
 app.listen(port, () => {
