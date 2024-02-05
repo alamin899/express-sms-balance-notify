@@ -6,8 +6,8 @@ const readyPayload = (data) => {
   
         "attachments":[
            {
-              "fallback":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
-              "pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
+              "fallback":"Available SMS Balance",
+              "pretext":"Available SMS Balance",
               "color":"#D00000",
               "fields":[
                  {
