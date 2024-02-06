@@ -10,8 +10,14 @@ const { smsBalanceSlackNotifyOperation } = require('./operations/sms-balance-sla
 const port = process.env.PORT || 3000;
 
 
-// Define your scheduled task to run every minute
-cron.schedule('*/5 * * * *',async () => {
+// Run every morning 07:00 AM
+cron.schedule('0 7 * * *',async () => {
+  await smsBalanceSlackNotifyOperation();
+  console.log(`Successfully notified!`);
+});
+
+// Run every morning 07:00 PM
+cron.schedule('0 19 * * *',async () => {
   await smsBalanceSlackNotifyOperation();
   console.log(`Successfully notified!`);
 });
