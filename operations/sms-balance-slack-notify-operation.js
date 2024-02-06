@@ -1,6 +1,6 @@
-const {readyPayload } = require('./data/slack-payload-value');
-const { sendNotification } = require('./services/slack-notification-service');
-const { callApi } = require('./services/external-api-call');
+const {readyPayload } = require('../data/slack-payload-value');
+const { sendNotification } = require('../services/slack-notification-service');
+const { callApi } = require('../services/external-api-call');
 
 const smsBalanceSlackNotifyOperation = async () => {
     const slackWebhookUrl = process.env.SLACK_WEB_HOOK_URL;
