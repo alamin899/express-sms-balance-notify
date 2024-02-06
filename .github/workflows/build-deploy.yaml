@@ -52,3 +52,23 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}:latest
+
+  deploy:
+      name: Development deploy process
+      needs: build
+      runs-on: self-hosted
+      environment: development
+      steps:
+        - name: Development Server Access via SSH Access
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.KEY }}
+            port: ${{ secrets.PORT }}
+            script: |
+              cd /var/www/sms-balance-notifier
+              docker-compose pull
+              docker-compose stop
+              docker-compose up --detach
+              make unused-images-remove
