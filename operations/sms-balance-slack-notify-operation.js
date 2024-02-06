@@ -7,7 +7,7 @@ const smsBalanceSlackNotifyOperation = async () => {
     const slackWebhookUrl = process.env.SLACK_WEB_HOOK_URL;
     const apiToken = process.env.SSL_WIRELESS_API_TOKEN;
     const retryUrl = process.env.RETRY_URL;
-    const apiUrl = "https://smsplus.sslwireless.com/api/v3/balances";
+    const apiUrl = "https://smsplus.sslwireless.com/api/v3/balance";
   
     const csmsIdsData = process.env.SSL_WIRELESS_CSMS_IDS;
     const csmsIds = csmsIdsData.split(',');
