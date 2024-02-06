@@ -18,6 +18,7 @@ cron.schedule('*/5 * * * *',() => {
 
 app.get('/notify',async (req, res) => {
   smsBalanceSlackNotifyOperation()
+  res.send(`Successfully notified!`);
 })
 
 app.get('/',async (req, res) => {
