@@ -51,7 +51,6 @@ for (const id of csmsIds) {
     }
 }
   
-console.log(notificationMessages);
       if(notificationMessages.length>0){
         sendNotification(slackWebhookUrl, notificationMessages,readyPayload);
       }
