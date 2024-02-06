@@ -70,4 +70,4 @@ jobs:
               docker-compose pull
               docker-compose stop
               docker-compose up --detach
-              make unused-images-remove
+              docker image prune -af
