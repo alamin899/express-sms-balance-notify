@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  dev-build:
+  build:
     name: Development Build
     runs-on: ubuntu-latest
     steps:
@@ -56,8 +56,7 @@ jobs:
   deploy:
       name: Development deploy process
       needs: build
-      runs-on: self-hosted
-      environment: development
+      runs-on: ubuntu-latest
       steps:
         - name: Development Server Access via SSH Access
           uses: appleboy/ssh-action@master
