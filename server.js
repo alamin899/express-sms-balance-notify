@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 require('dotenv').config();
 const cron = require('node-cron');
-const axios = require('axios');
 
 const {readyPayload } = require('./Data/slackPayloadValue');
 const { sendNotification } = require('./Services/slackNotificationService');
