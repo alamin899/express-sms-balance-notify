@@ -18,13 +18,11 @@ jobs:
           cp .env.example .env
           sed -i '/APP_PORT/d' .env
           sed -i '/SLACK_WEB_HOOK_URL/d' .env
-          sed -i '/SSL_API_ENDPOINT/d' .env
           sed -i '/SSL_WIRELESS_API_TOKEN/d' .env
           sed -i '/SSL_WIRELESS_CSMS_IDS/d' .env
 
           echo 'APP_PORT=${{ secrets.APP_PORT }}' >> .env
           echo 'SLACK_WEB_HOOK_URL=${{ secrets.SLACK_WEB_HOOK_URL }}' >> .env
-          echo 'SSL_API_ENDPOINT="${{ secrets.SSL_API_ENDPOINT }}"' >> .env
           echo 'SSL_WIRELESS_API_TOKEN="${{ secrets.SSL_WIRELESS_API_TOKEN }}"' >> .env
           echo 'SSL_WIRELESS_CSMS_IDS="${{ secrets.SSL_WIRELESS_CSMS_IDS }}"' >> .env
         shell: bash
