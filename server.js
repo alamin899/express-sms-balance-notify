@@ -11,13 +11,14 @@ const port = process.env.PORT || 3000;
 
 
 // Define your scheduled task to run every minute
-cron.schedule('*/5 * * * *',() => {
-  smsBalanceSlackNotifyOperation()
+cron.schedule('*/5 * * * *',async () => {
+  await smsBalanceSlackNotifyOperation();
+  console.log(`Successfully notified!`);
 });
 
 
 app.get('/notify',async (req, res) => {
-  smsBalanceSlackNotifyOperation()
+  await smsBalanceSlackNotifyOperation();
   res.send(`Successfully notified!`);
 })
 
