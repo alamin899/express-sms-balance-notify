@@ -29,7 +29,7 @@ app.get('/notify',async (req, res) => {
 })
 
 app.get('/',async (req, res) => {
-  res.send(`Landing pages`);
+  res.send(`Landing page!`);
 })
 
 app.listen(port, () => {
