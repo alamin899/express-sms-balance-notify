@@ -68,7 +68,7 @@ jobs:
             script: |
               cd /              
               docker stop $(docker ps -q --filter ancestor=${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }} )
-              docker rm $(docker ps -a -q)
+              docker rm $(docker ps -a --filter "status=exited" -q)
               docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker run -d -p 3031:3000 --name ${{ secrets.DOCKER_REPOSITORY_NAME }} ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               # cd /var/www/sms-balance-notifier
