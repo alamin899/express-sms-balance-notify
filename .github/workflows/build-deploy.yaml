@@ -67,7 +67,8 @@ jobs:
             port: ${{ secrets.PORT }}
             script: |
               cd /
-              docker stop ${{ secrets.DOCKER_REPOSITORY_NAME }} || true              
+              docker_container_name=$(docker ps -qf "ancestor=${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}")
+              docker stop "$docker_container_name"
               docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker run -d -p 3031:3000 --name ${{ secrets.DOCKER_REPOSITORY_NAME }} ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker image prune -af
