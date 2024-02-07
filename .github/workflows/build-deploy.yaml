@@ -67,9 +67,9 @@ jobs:
             port: ${{ secrets.PORT }}
             script: |
               cd /
-              docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker stop -f ${{ secrets.DOCKER_REPOSITORY_NAME }} || true
               docker rm -f ${{ secrets.DOCKER_REPOSITORY_NAME }} || true
+              docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker run -d -p 3031:3000 --name ${{ secrets.DOCKER_REPOSITORY_NAME }} ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker image prune -af
               # cd /var/www/sms-balance-notifier
