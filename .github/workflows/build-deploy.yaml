@@ -66,8 +66,13 @@ jobs:
             key: ${{ secrets.KEY }}
             port: ${{ secrets.PORT }}
             script: |
-              cd /var/www/sms-balance-notifier
-              docker-compose pull
-              docker-compose stop
-              docker-compose up --detach
+              cd /
+              docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
+              docker stop ${{ secrets.DOCKER_REPOSITORY_NAME }}
+              docker run -d -p 3031:3000 --name ${{ secrets.DOCKER_REPOSITORY_NAME }} ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
               docker image prune -af
+              # cd /var/www/sms-balance-notifier
+              # docker-compose pull
+              # docker-compose stop
+              # docker-compose up --detach
+              # docker image prune -af
