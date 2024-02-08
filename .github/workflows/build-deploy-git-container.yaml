@@ -43,4 +43,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_CONTAINER_REGISTRY_GIT }}/alamin899/express-sms-balance-notify:latest
+          tags: ${{ secrets.DOCKER_CONTAINER_REGISTRY_GIT }}/alamin899/alamin899/express-sms-balance-notify:v2.x
