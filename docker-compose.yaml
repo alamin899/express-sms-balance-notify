@@ -1,0 +1,14 @@
+version: '3'
+
+networks:
+  sms-balance-notifier:
+    driver: bridge
+
+services:
+  sms-balance-notifier-app:
+    image: alamin899/sms-balance-notifier:latest
+    container_name: sms-balance-notifier-app
+    ports:
+      - "3031:3000"
+    networks:
+      - sms-balance-notifier

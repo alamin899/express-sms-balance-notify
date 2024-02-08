@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  dev-build:
+  build:
     name: Development Build
     runs-on: ubuntu-latest
     steps:
@@ -16,15 +16,15 @@ jobs:
       - name: Create environment file and update variable from secrets
         run: |
           cp .env.example .env
-          sed -i '/APP_PORT/d' .env
+          sed -i '/PORT/d' .env
           sed -i '/SLACK_WEB_HOOK_URL/d' .env
           sed -i '/SSL_WIRELESS_API_TOKEN/d' .env
           sed -i '/SSL_WIRELESS_CSMS_IDS/d' .env
 
-          echo 'APP_PORT=${{ secrets.APP_PORT }}' >> .env
+          echo 'PORT=${{ secrets.APP_PORT }}' >> .env
           echo 'SLACK_WEB_HOOK_URL=${{ secrets.SLACK_WEB_HOOK_URL }}' >> .env
-          echo 'SSL_WIRELESS_API_TOKEN="${{ secrets.SSL_WIRELESS_API_TOKEN }}"' >> .env
-          echo 'SSL_WIRELESS_CSMS_IDS="${{ secrets.SSL_WIRELESS_CSMS_IDS }}"' >> .env
+          echo 'SSL_WIRELESS_API_TOKEN=${{ secrets.SSL_WIRELESS_API_TOKEN }}' >> .env
+          echo 'SSL_WIRELESS_CSMS_IDS=${{ secrets.SSL_WIRELESS_CSMS_IDS }}' >> .env
         shell: bash
 
       - name: Set up Docker Build
@@ -50,3 +50,27 @@ jobs:
           push: true
           # tags: ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}:latest #push to docker hub
           tags: docker.pkg.github.com/${{ github.repository_owner}}/${{ github.repository }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
+
+  deploy:
+    name: Development deploy process
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Development Server Access via SSH Access
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /              
+            docker stop $(docker ps -q --filter ancestor=${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }} )
+            docker rm $(docker ps -a --filter "status=exited" -q)
+            docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
+            docker run -d -p 3031:3000 --name ${{ secrets.DOCKER_REPOSITORY_NAME }} ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
+            # cd /var/www/sms-balance-notifier
+            # docker-compose pull
+            # docker-compose stop
+            # docker-compose up --detach
+            # docker image prune -af

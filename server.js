@@ -25,11 +25,11 @@ cron.schedule('0 19 * * *',async () => {
 
 app.get('/notify',async (req, res) => {
   await smsBalanceSlackNotifyOperation();
-  res.send(`Successfully notified!`);
+  res.send(`Successfully notification send to your slack channe!`);
 })
 
 app.get('/',async (req, res) => {
-  res.send(`Landing pages`);
+  res.send(`Landing page!`);
 })
 
 app.listen(port, () => {
