@@ -11,15 +11,19 @@ const port = process.env.PORT || 3000;
 
 
 // Run every morning 07:00 AM
-cron.schedule('0 7 * * *',async () => {
+cron.schedule('15 14 * * *',async () => {
   await smsBalanceSlackNotifyOperation();
   console.log(`Successfully notified!`);
+},{
+  timezone: 'Asia/Dhaka'
 });
 
 // Run every morning 07:00 PM
-cron.schedule('0 19 * * *',async () => {
+cron.schedule('20 14 * * *',async () => {
   await smsBalanceSlackNotifyOperation();
   console.log(`Successfully notified!`);
+},{
+  timezone: 'Asia/Dhaka'
 });
 
 
