@@ -40,4 +40,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: docker.pkg.github.com/${{ github.repository_owner }}/${{ secrets.DOCKER_REPOSITORY_NAME }}:latest
+          tags: docker.pkg.github.com/${{ github.repository_owner }}/${{ github.repository }}:latest
