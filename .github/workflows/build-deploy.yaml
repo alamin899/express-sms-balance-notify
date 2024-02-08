@@ -69,8 +69,3 @@ jobs:
             docker rm $(docker ps -a --filter "status=exited" -q)
             docker pull ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
             docker run -d -p 3031:3000 --name ${{ secrets.DOCKER_REPOSITORY_NAME }} ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
-            # cd /var/www/sms-balance-notifier
-            # docker-compose pull
-            # docker-compose stop
-            # docker-compose up --detach
-            # docker image prune -af
