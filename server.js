@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 
 // Run every morning 07:00 AM
-cron.schedule('5 14 * * *',async () => {
+cron.schedule('1 * * * *',async () => {
   await smsBalanceSlackNotifyOperation();
   console.log(`Successfully notified!`);
 },{
