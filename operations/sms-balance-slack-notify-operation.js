@@ -3,7 +3,7 @@ const {failedPayload } = require('../data/slack-failed-payload');
 const { sendNotification } = require('../services/slack-notification-service');
 const { callApi } = require('../services/external-api-call');
 
-const smsBalanceSlackNotifyOperation = async () => {
+const smsBalanceSlackNotifyOperation = async (returnOnlyData=false) => {
     const slackWebhookUrl = process.env.SLACK_WEB_HOOK_URL;
     const apiToken = process.env.SSL_WIRELESS_API_TOKEN;
     const retryUrl = process.env.RETRY_URL;
@@ -50,6 +50,9 @@ for (const id of csmsIds) {
         }
     }
 }
+      if(returnOnlyData){
+        return {'balance': notificationMessages};
+      }
   
       if(notificationMessages.length>0){
         sendNotification(slackWebhookUrl, notificationMessages,readyPayload);
