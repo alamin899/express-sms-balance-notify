@@ -35,7 +35,7 @@ jobs:
         with:
           registry: ${{ secrets.DOCKER_CONTAINER_REGISTRY_GIT }}
           username: ${{ secrets.DOCKER_USERNAME_GIT }}
-          password: ${{ secrets.DOCKER_PASSWORD_GIT }}
+          password: ${{ secrets.GIT_TOKEN }}
       - name: Build and Push
         if: ${{ success() }}
         uses: docker/build-push-action@v5
