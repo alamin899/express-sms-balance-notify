@@ -43,4 +43,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.CONTAINER_REGISTRY }}/${{ github.repository }}:latest
+          tags: ${{ secrets.CONTAINER_REGISTRY }}/appnap-technologies-ltd/sms-balance-notify:latest
