@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 
 // Run every morning 07:00 AM
-cron.schedule('15 14 * * *',async () => {
+cron.schedule('0 7 * * *',async () => {
   await smsBalanceSlackNotifyOperation();
   console.log(`Successfully notified!`);
 },{
@@ -19,7 +19,7 @@ cron.schedule('15 14 * * *',async () => {
 });
 
 // Run every morning 07:00 PM
-cron.schedule('20 14 * * *',async () => {
+cron.schedule('0 19 * * *',async () => {
   await smsBalanceSlackNotifyOperation();
   console.log(`Successfully notified!`);
 },{
@@ -31,6 +31,13 @@ app.get('/notify',async (req, res) => {
   await smsBalanceSlackNotifyOperation();
   res.send(`Successfully notification send to your slack channe!`);
 })
+
+app.get('/balance',async (req, res) => {
+  var response = await smsBalanceSlackNotifyOperation(true);
+  res.send(response?.balance);
+})
+
+
 
 app.get('/',async (req, res) => {
   res.send(`Landing page!`);
