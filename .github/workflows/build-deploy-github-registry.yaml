@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Development Build
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Set up Actions
