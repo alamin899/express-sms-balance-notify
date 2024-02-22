@@ -40,7 +40,7 @@ app.get('/balance',async (req, res) => {
 
 
 app.get('/',async (req, res) => {
-  res.send(`Landing page!`);
+  res.send(`Home page!`);
 })
 
 app.listen(port, () => {
